@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Everything Search</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzRmOThhMyIvPgogIDxjaXJjbGUgY3g9IjEzIiBjeT0iMTMiIHI9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMi41Ii8+CiAgPGxpbmUgeDE9IjE3LjUiIHkxPSIxNy41IiB4Mj0iMjQiIHkyPSIyNCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSIxMCIgeTE9IjEzIiB4Mj0iMTYiIHkyPSIxMyIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8bGluZSB4MT0iMTMiIHkxPSIxMCIgeDI9IjEzIiB5Mj0iMTYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPg==">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
   --pri:#01696f;--pri-h:#0c4e54;--pri-hi:#cedcd8;
   --ok:#437a22;--ok-hi:#d4dfcc;
   --err:#a12c7b;--warn:#964219;--warn-hi:#ddcfc6;
-  --sh-sm:0 1px 2px oklch(.2 .01 80/.06);--sh-md:0 4px 12px oklch(.2 .01 80/.08);--sh-lg:0 12px 32px oklch(.2 .01 80/.12);
+  --sh-lg:0 12px 32px oklch(.2 .01 80/.12);--sh-md:0 4px 12px oklch(.2 .01 80/.08);
   --r-sm:.375rem;--r-md:.5rem;--r-lg:.75rem;--r-xl:1rem;--r-f:9999px;
   --tr:180ms cubic-bezier(.16,1,.3,1);
   --ff:"Geist","Inter",sans-serif;--fm:"Geist Mono",monospace;
@@ -30,24 +31,25 @@
   --pri:#4f98a3;--pri-h:#227f8b;--pri-hi:#313b3b;
   --ok:#6daa45;--ok-hi:#2a3a22;
   --err:#d163a7;--warn:#bb653b;--warn-hi:#3a2e24;
-  --sh-sm:0 1px 2px oklch(0 0 0/.25);--sh-md:0 4px 12px oklch(0 0 0/.35);--sh-lg:0 12px 32px oklch(0 0 0/.5);
+  --sh-lg:0 12px 32px oklch(0 0 0/.5);--sh-md:0 4px 12px oklch(0 0 0/.35);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+html{-webkit-font-smoothing:antialiased}
 body{min-height:100dvh;font-family:var(--ff);font-size:var(--sm);color:var(--txt);background:var(--bg);line-height:1.5}
 button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
 input,textarea{font:inherit;color:inherit}
-a,button{transition:color var(--tr),background var(--tr),border-color var(--tr),box-shadow var(--tr),opacity var(--tr)}
 :focus-visible{outline:2px solid var(--pri);outline-offset:3px;border-radius:var(--r-sm)}
 .app{display:grid;grid-template-rows:auto 1fr;min-height:100dvh}
+/* TOP BAR */
 .top{display:flex;align-items:center;justify-content:space-between;padding:var(--s3) var(--s6);background:var(--surf);border-bottom:1px solid var(--bdr);position:sticky;top:0;z-index:50;gap:var(--s4)}
-.logo{display:flex;align-items:center;gap:var(--s2);font-size:var(--sm);font-weight:600;letter-spacing:-.01em;color:var(--txt);text-decoration:none;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:var(--s2);font-size:var(--sm);font-weight:600;letter-spacing:-.01em;color:var(--txt);text-decoration:none}
 .lm{width:28px;height:28px;background:var(--pri);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.top-r{display:flex;align-items:center;gap:var(--s2)}
-.tt{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--txt-m);border:1px solid transparent}
+.tt{width:36px;height:36px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;color:var(--txt-m);transition:background var(--tr)}
 .tt:hover{background:var(--surf-dyn);color:var(--txt)}
-.body{display:grid;grid-template-columns:260px 1fr;min-height:0}
+/* LAYOUT */
+.body{display:grid;grid-template-columns:268px 1fr;min-height:0}
 @media(max-width:768px){.body{grid-template-columns:1fr}.sb{display:none}}
+/* SIDEBAR */
 .sb{display:flex;flex-direction:column;background:var(--surf);border-right:1px solid var(--bdr);overflow-y:auto;padding:var(--s4);gap:var(--s5)}
 .lbl{font-size:var(--xs);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--txt-f);padding:0 var(--s2);margin-bottom:var(--s2)}
 .elist{display:flex;flex-direction:column;gap:2px}
@@ -67,21 +69,27 @@ a,button{transition:color var(--tr),background var(--tr),border-color var(--tr),
 .legend{display:flex;flex-direction:column;gap:var(--s2);padding:var(--s3);background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r-lg)}
 .lr{display:flex;align-items:flex-start;gap:var(--s2)}
 .lt{font-size:var(--xs);color:var(--txt-m);line-height:1.5}
+/* CUSTOM ENGINE */
 .af{border-top:1px solid var(--div);padding-top:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
 .af input[type=text]{width:100%;background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r-md);padding:var(--s2) var(--s3);font-size:var(--xs);color:var(--txt)}
 .af input[type=text]:focus{outline:none;border-color:var(--pri)}
 .af input[type=text]::placeholder{color:var(--txt-f)}
-.add-btn{background:var(--surf-dyn);border:1px solid var(--bdr);border-radius:var(--r-md);padding:var(--s2) var(--s3);font-size:var(--xs);font-weight:500;color:var(--txt-m);text-align:center}
+.add-btn{background:var(--surf-dyn);border:1px solid var(--bdr);border-radius:var(--r-md);padding:var(--s2) var(--s3);font-size:var(--xs);font-weight:500;color:var(--txt-m);text-align:center;width:100%}
 .add-btn:hover{color:var(--txt);background:var(--surf-off)}
+/* MAIN */
 .mp{display:flex;flex-direction:column;align-items:center;padding:var(--s8) var(--s6);gap:var(--s5);max-width:820px;margin:0 auto;width:100%}
 .hl{font-size:var(--xs);font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--pri)}
 .mh{font-size:var(--xl);font-weight:600;letter-spacing:-.025em;color:var(--txt);text-align:center;line-height:1.2}
 .mh span{color:var(--txt-m)}
+/* CHROME POPUP NOTICE */
+.chrome-notice{width:100%;background:var(--pri-hi);border:1px solid oklch(from var(--pri) l c h/.3);border-radius:var(--r-lg);padding:var(--s3) var(--s4);font-size:var(--xs);color:var(--txt);line-height:1.6}
+.chrome-notice strong{color:var(--pri);font-weight:600}
+/* PASTE ALERT */
 .pa{width:100%;background:var(--warn-hi);border:1px solid oklch(from var(--warn) l c h/.3);border-radius:var(--r-lg);padding:var(--s3) var(--s4);display:none;gap:var(--s3);align-items:flex-start}
 .pa.vis{display:flex}
-.pai{flex-shrink:0;color:var(--warn);margin-top:1px}
 .pat{font-size:var(--xs);color:var(--txt);line-height:1.6}
 .pat strong{color:var(--warn);font-weight:600}
+/* PROMPT CARD */
 .pc{width:100%;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r-xl);box-shadow:var(--sh-lg);overflow:hidden}
 .ta{width:100%;background:transparent;border:none;outline:none;padding:var(--s5) var(--s5) var(--s2);font-size:var(--base);color:var(--txt);resize:none;min-height:110px;line-height:1.6;font-family:var(--ff)}
 .ta::placeholder{color:var(--txt-f)}
@@ -89,35 +97,32 @@ a,button{transition:color var(--tr),background var(--tr),border-color var(--tr),
 .chips{display:flex;flex-wrap:wrap;gap:var(--s1);flex:1;min-width:0}
 .chip{padding:2px var(--s2);border-radius:var(--r-f);font-size:var(--xs);font-weight:500;white-space:nowrap}
 .ce{font-size:var(--xs);color:var(--txt-f);padding:2px 0}
-.lb{display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s5);background:var(--pri);color:var(--txt-inv);border-radius:var(--r-md);font-size:var(--sm);font-weight:600;white-space:nowrap;flex-shrink:0}
+.lb{display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s5);background:var(--pri);color:var(--txt-inv);border-radius:var(--r-md);font-size:var(--sm);font-weight:600;white-space:nowrap;flex-shrink:0;transition:background var(--tr)}
 .lb:hover{background:var(--pri-h)}
 .lb:disabled{opacity:.4;cursor:not-allowed}
+/* LAUNCH QUEUE */
+.lq{width:100%;display:flex;flex-direction:column;gap:var(--s3)}
+.lq-title{font-size:var(--xs);font-weight:600;color:var(--txt);display:flex;align-items:center;justify-content:space-between}
+.lq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--s2)}
+.lq-btn{display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s3);border-radius:var(--r-md);border:1.5px solid var(--bdr);background:var(--surf);font-size:var(--xs);font-weight:500;color:var(--txt);transition:all var(--tr);cursor:pointer;width:100%}
+.lq-btn:hover{background:var(--surf-dyn);transform:translateY(-1px);box-shadow:var(--sh-md)}
+.lq-btn.opened{border-color:var(--ok);color:var(--ok);background:var(--ok-hi)}
+.lq-btn.opening{border-color:var(--pri);color:var(--pri);background:var(--pri-hi)}
+.lq-open-all{display:flex;align-items:center;gap:var(--s2);padding:var(--s2) var(--s4);background:var(--pri);color:var(--txt-inv);border-radius:var(--r-md);font-size:var(--xs);font-weight:600;white-space:nowrap;transition:background var(--tr)}
+.lq-open-all:hover{background:var(--pri-h)}
+/* STATUS */
 .sb2{width:100%;display:flex;align-items:center;justify-content:space-between;gap:var(--s4)}
 .sm2{font-size:var(--xs);color:var(--txt-m)}.sm2 strong{color:var(--txt);font-weight:500}
 .cb{font-size:var(--xs);color:var(--txt-f);padding:2px var(--s2);border-radius:var(--r-sm)}
 .cb:hover{color:var(--txt-m);background:var(--surf-dyn)}
-.bk{width:100%;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r-xl);box-shadow:var(--sh-md);overflow:hidden}
-.bkh{display:flex;align-items:center;justify-content:space-between;padding:var(--s4) var(--s5);border-bottom:1px solid var(--div);cursor:pointer;gap:var(--s3)}
-.bkh h3{font-size:var(--sm);font-weight:600;display:flex;align-items:center;gap:var(--s2)}
-.bkb{padding:var(--s4) var(--s5);display:flex;flex-direction:column;gap:var(--s4)}
-.bkb.hide{display:none}
-.steps{display:flex;flex-direction:column;gap:var(--s3)}
-.step{display:flex;gap:var(--s3);align-items:flex-start}
-.sn{width:22px;height:22px;border-radius:var(--r-f);background:var(--pri);color:var(--txt-inv);font-size:var(--xs);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.st{font-size:var(--xs);color:var(--txt-m);line-height:1.6;flex:1}
-.st strong{color:var(--txt);font-weight:600}
-.info-box{background:var(--pri-hi);border:1px solid oklch(from var(--pri) l c h/.3);border-radius:var(--r-lg);padding:var(--s4);font-size:var(--xs);color:var(--txt);line-height:1.7}
-.info-box h4{font-size:var(--sm);font-weight:600;color:var(--txt);margin-bottom:var(--s2)}
-.info-box strong{color:var(--pri);font-weight:600}
-.bka{display:block;background:var(--pri);color:var(--txt-inv);border-radius:var(--r-md);padding:var(--s3) var(--s4);font-size:var(--sm);font-weight:600;text-align:center;text-decoration:none;border:2px dashed oklch(from var(--pri) l c h/.4)}
-.bka:hover{background:var(--pri-h)}
-.bkn{font-size:var(--xs);color:var(--txt-f);text-align:center;line-height:1.5}
+/* QUICK PROMPTS */
 .qsec{width:100%}
 .qg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--s2)}
 .qc{padding:var(--s3) var(--s4);background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r-lg);cursor:pointer;text-align:left;transition:all var(--tr);width:100%}
 .qc:hover{background:var(--surf-dyn);border-color:var(--pri)}
 .ql{font-size:var(--xs);color:var(--txt-f);margin-bottom:2px}
 .qt{font-size:var(--xs);font-weight:500;color:var(--txt-m);line-height:1.4}
+/* HISTORY */
 .hs{width:100%}
 .hh{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s2)}
 .hl2{display:flex;flex-direction:column;gap:var(--s1)}
@@ -125,8 +130,9 @@ a,button{transition:color var(--tr),background var(--tr),border-color var(--tr),
 .hi:hover{background:var(--surf-dyn)}
 .ht{flex:1;font-size:var(--xs);color:var(--txt-m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .htm{font-size:var(--xs);color:var(--txt-f);font-family:var(--fm);flex-shrink:0}
-.hd{width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:var(--txt-f);flex-shrink:0}
+.hd{width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:var(--txt-f)}
 .hd:hover{color:var(--err);background:oklch(from var(--err) l c h/.1)}
+/* TOAST */
 .tc{position:fixed;bottom:var(--s6);right:var(--s6);z-index:100;display:flex;flex-direction:column;gap:var(--s2)}
 .toast{background:var(--surf2);border:1px solid var(--bdr);border-radius:var(--r-lg);padding:var(--s3) var(--s4);font-size:var(--xs);color:var(--txt);box-shadow:var(--sh-lg);animation:ti .2s cubic-bezier(.16,1,.3,1) forwards}
 .toast.ok{border-color:oklch(from var(--ok) l c h/.4)}
@@ -141,11 +147,18 @@ code{font-family:var(--fm);font-size:.9em;color:var(--pri)}
 <div class="app">
 <header class="top">
   <a href="#" class="logo">
-    <div class="lm"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2L3 9h5l-1 5 6-7H8l1-5z" fill="white"/></svg></div>
-    ZPower AI Hub
+    <div class="lm">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="6.5" cy="6.5" r="4" fill="none" stroke="white" stroke-width="1.8"/>
+        <line x1="9.5" y1="9.5" x2="13" y2="13" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+        <line x1="4.5" y1="6.5" x2="8.5" y2="6.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="6.5" y1="4.5" x2="6.5" y2="8.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    Everything Search
   </a>
-  <span style="font-size:var(--xs);color:var(--txt-f);display:flex;gap:4px;align-items:center"><kbd>Ctrl</kbd><kbd>Enter</kbd> to launch</span>
-  <div class="top-r">
+  <span style="font-size:var(--xs);color:var(--txt-f);display:flex;gap:4px;align-items:center"><kbd>Ctrl</kbd><kbd>Enter</kbd> to prepare</span>
+  <div style="display:flex;align-items:center;gap:var(--s2)">
     <button class="tt" data-tt aria-label="Switch theme">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
@@ -161,18 +174,18 @@ code{font-family:var(--fm);font-size:.9em;color:var(--pri)}
     </div>
     <div class="legend">
       <div class="lbl" style="margin-bottom:var(--s1)">How it works</div>
-      <div class="lr"><span class="badge ba" style="margin-top:2px;flex-shrink:0">AUTO</span><span class="lt">Opens with prompt pre-filled &amp; submitted automatically</span></div>
-      <div class="lr"><span class="badge bp" style="margin-top:2px;flex-shrink:0">PASTE</span><span class="lt">Opens a fresh chat + copies prompt to clipboard — press <kbd>Ctrl+V</kbd> then <kbd>Enter</kbd></span></div>
+      <div class="lr"><span class="badge ba" style="margin-top:2px;flex-shrink:0">AUTO</span><span class="lt">Opens with prompt pre-filled &amp; submitted</span></div>
+      <div class="lr"><span class="badge bp" style="margin-top:2px;flex-shrink:0">PASTE</span><span class="lt">Opens fresh chat — press <kbd>Ctrl+V</kbd> then <kbd>Enter</kbd></span></div>
     </div>
     <div class="af">
       <div class="lbl">Add Custom Engine</div>
       <input type="text" id="cName" placeholder="Name (e.g. Mistral)" maxlength="30"/>
-      <input type="text" id="cUrl" placeholder="URL — use {q} for AUTO mode" maxlength="400"/>
-      <label style="font-size:var(--xs);color:var(--txt-m);display:flex;align-items:center;gap:var(--s2);cursor:pointer">
+      <input type="text" id="cUrl" placeholder="URL — use {q} for AUTO" maxlength="400"/>
+      <label style="font-size:var(--xs);color:var(--txt-m);display:flex;align-items:center;gap:var(--s2);cursor:pointer;padding:var(--s1) 0">
         <input type="checkbox" id="cAuto" style="width:14px;height:14px;accent-color:var(--pri)"> Auto-submits via URL
       </label>
       <button class="add-btn" onclick="addEngine()">+ Add Engine</button>
-      <span style="font-size:var(--xs);color:var(--txt-f);line-height:1.5">AUTO: include <code>{q}</code> in URL.<br>PASTE: just enter the base URL.</span>
+      <span style="font-size:var(--xs);color:var(--txt-f);line-height:1.5;padding:0 var(--s1)">AUTO: include <code>{q}</code> in URL.<br>PASTE: enter the base URL only.</span>
     </div>
   </aside>
 
@@ -180,47 +193,37 @@ code{font-family:var(--fm);font-size:.9em;color:var(--pri)}
     <div class="hl">Multi-Engine AI Search</div>
     <h1 class="mh">Ask once. <span>Search everywhere.</span></h1>
 
+    <div class="chrome-notice">
+      <strong>⚡ Chrome Popup Fix:</strong> Type your prompt → click <strong>Prepare Launch</strong> → individual buttons appear for each engine. Click each one to open it. This bypasses Chrome's popup blocker completely — no settings change needed.
+    </div>
+
     <div class="pa" id="pasteAlert">
-      <div class="pai"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div style="flex-shrink:0;color:var(--warn);margin-top:1px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
       <div class="pat" id="pasteMsg"></div>
     </div>
 
     <div class="pc">
-      <textarea class="ta" id="ta" placeholder="Enter your prompt… Ctrl+Enter to launch all selected engines" rows="4" aria-label="Prompt"></textarea>
+      <textarea class="ta" id="ta" placeholder="Type your prompt here… then click Prepare Launch" rows="4" aria-label="Prompt"></textarea>
       <div class="pf">
         <div class="chips" id="chips"><span class="ce" id="ce">No engines selected</span></div>
-        <button class="lb" id="lb" onclick="launch()" disabled>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 2L3 9h5l-1 5 6-7H8l1-5z"/></svg>Launch
+        <button class="lb" id="lb" onclick="prepLaunch()" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 2L3 9h5l-1 5 6-7H8l1-5z"/></svg>Prepare Launch
         </button>
       </div>
     </div>
 
-    <div class="sb2">
-      <div class="sm2" id="sm2">Select engines on the left, type your prompt, then launch.</div>
-      <button class="cb" onclick="clearP()">Clear</button>
+    <!-- LAUNCH QUEUE — shown after Prepare -->
+    <div class="lq" id="launchQueue" style="display:none">
+      <div class="lq-title">
+        <span>Click each engine to open it <span style="color:var(--txt-f);font-weight:400">(Chrome requires individual clicks)</span></span>
+        <button class="lq-open-all" id="openAllBtn" onclick="openNext()">Open Next →</button>
+      </div>
+      <div class="lq-grid" id="lqGrid"></div>
     </div>
 
-    <div class="bk">
-      <div class="bkh" onclick="toggleBk()">
-        <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>Save to Chrome Bookmarks Bar — use on any PC</h3>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="bkChev"><path d="M6 9l6 6 6-6"/></svg>
-      </div>
-      <div class="bkb hide" id="bkBody">
-        <div class="info-box">
-          <h4>📌 No HTML file needed on any PC</h4>
-          The bookmarklet stores all the code <strong>inside the bookmark itself</strong> — no file required. Click it on any PC for a prompt dialog that opens all engines. <strong>Chrome syncs bookmarks via your Google account</strong> so it appears on every PC automatically.
-        </div>
-        <div class="steps">
-          <div class="step"><div class="sn">1</div><div class="st">Show your Chrome bookmarks bar if hidden: <strong>Ctrl+Shift+B</strong></div></div>
-          <div class="step"><div class="sn">2</div><div class="st"><strong>Drag the teal button below</strong> up to your bookmarks bar and release</div></div>
-          <div class="step"><div class="sn">3</div><div class="st">Sign into Chrome with your Google account — syncs to all your PCs automatically. <strong>No HTML file needed anywhere.</strong></div></div>
-          <div class="step"><div class="sn">4</div><div class="st"><strong>Want full interface on all PCs?</strong> Drop this HTML on <a href="https://app.netlify.com/drop" target="_blank" rel="noopener" style="color:var(--pri)">app.netlify.com/drop</a> (free) → get a permanent URL → bookmark that instead</div></div>
-        </div>
-        <a class="bka" id="bkA" href="#" onclick="return false;" title="Drag me to your Chrome bookmarks bar!">
-          ⚡ ZPower AI Hub — drag to bookmarks bar
-        </a>
-        <div class="bkn">Drag the button above to your bookmarks bar. The entire app runs from inside the bookmark — no files needed.</div>
-      </div>
+    <div class="sb2">
+      <div class="sm2" id="sm2">Select engines on the left, type your prompt, then prepare launch.</div>
+      <button class="cb" onclick="clearAll()">Clear</button>
     </div>
 
     <div class="qsec">
@@ -238,27 +241,28 @@ code{font-family:var(--fm);font-size:.9em;color:var(--pri)}
   </main>
 </div>
 </div>
+
 <div class="tc" id="tc" aria-live="polite"></div>
 
 <script>
-// v5 FINAL
-// ChatGPT fix: use https://chatgpt.com/new — forces a brand new chat, no session bleed-in
-// Claude fix: use https://claude.ai/new — PASTE mode, no URL param = no security warning
-// All PASTE engines: open clean URL, prompt auto-copied to clipboard
+// Everything Search v6
+// CHROME FIX: Instead of window.open() in a loop (blocked by Chrome),
+// we render individual clickable buttons — each click is a direct user gesture
+// which Chrome always allows. "Open Next" button advances through them one at a time.
 
 const ENG = [
-  {id:"perplexity",name:"Perplexity", url:"https://www.perplexity.ai/search?q={q}",    color:"#20808d", e:"🔍", auto:true},
-  {id:"chatgpt",   name:"ChatGPT",    url:"https://chatgpt.com/new",                   color:"#74aa9c", e:"🤖", auto:false},
-  {id:"claude",    name:"Claude",     url:"https://claude.ai/new",                     color:"#d97757", e:"🧠", auto:false},
-  {id:"gemini",    name:"Gemini",     url:"https://gemini.google.com/app",             color:"#4285f4", e:"✨", auto:false},
-  {id:"grok",      name:"Grok",       url:"https://grok.com/",                         color:"#1da1f2", e:"⚡", auto:false},
-  {id:"copilot",   name:"Copilot",    url:"https://copilot.microsoft.com/",            color:"#0078d4", e:"🪟", auto:false},
-  {id:"you",       name:"You.com",    url:"https://you.com/search?q={q}&chatMode=ai",  color:"#9333ea", e:"💫", auto:true},
-  {id:"deepseek",  name:"DeepSeek",   url:"https://chat.deepseek.com/",                color:"#3b82f6", e:"🌊", auto:false},
-  {id:"lechat",    name:"Le Chat",    url:"https://chat.mistral.ai/chat",              color:"#ff7000", e:"🌀", auto:false},
-  {id:"metaai",    name:"Meta AI",    url:"https://www.meta.ai/",                      color:"#0866ff", e:"🔵", auto:false},
-  {id:"lumo",      name:"Lumo",       url:"https://lumo.proton.me/u/0/?q={q}",         color:"#6d4aff", e:"🔒", auto:true},
-  {id:"qwen",      name:"Qwen",       url:"https://chat.qwen.ai/",                     color:"#5ba4f5", e:"🤍", auto:false},
+  {id:"perplexity",name:"Perplexity", url:"https://www.perplexity.ai/search?q={q}",   color:"#20808d", e:"🔍", auto:true},
+  {id:"chatgpt",   name:"ChatGPT",    url:"https://chatgpt.com/new",                    color:"#74aa9c", e:"🤖", auto:false},
+  {id:"claude",    name:"Claude",     url:"https://claude.ai/new",                      color:"#d97757", e:"🧠", auto:false},
+  {id:"gemini",    name:"Gemini",     url:"https://gemini.google.com/app",              color:"#4285f4", e:"✨", auto:false},
+  {id:"grok",      name:"Grok",       url:"https://grok.com/",                          color:"#1da1f2", e:"⚡", auto:false},
+  {id:"copilot",   name:"Copilot",    url:"https://copilot.microsoft.com/",             color:"#0078d4", e:"🪟", auto:false},
+  {id:"you",       name:"You.com",    url:"https://you.com/search?q={q}&chatMode=ai", color:"#9333ea", e:"💫", auto:true},
+  {id:"deepseek",  name:"DeepSeek",   url:"https://chat.deepseek.com/",                 color:"#3b82f6", e:"🌊", auto:false},
+  {id:"lechat",    name:"Le Chat",    url:"https://chat.mistral.ai/chat",               color:"#ff7000", e:"🌀", auto:false},
+  {id:"metaai",    name:"Meta AI",    url:"https://www.meta.ai/",                       color:"#0866ff", e:"🔵", auto:false},
+  {id:"lumo",      name:"Lumo",       url:"https://lumo.proton.me/u/0/?q={q}",        color:"#6d4aff", e:"🔒", auto:true},
+  {id:"qwen",      name:"Qwen",       url:"https://chat.qwen.ai/",                      color:"#5ba4f5", e:"🤍", auto:false},
 ];
 
 const QP = [
@@ -273,6 +277,9 @@ const QP = [
 let engines = JSON.parse(JSON.stringify(ENG));
 let sel = new Set(["perplexity","chatgpt","gemini","grok","claude"]);
 let hist = [];
+let queueItems = [];
+let queueIndex = 0;
+let currentPrompt = "";
 
 function renderEngines(){
   const l=document.getElementById("eList"); l.innerHTML="";
@@ -280,7 +287,6 @@ function renderEngines(){
     const iS=sel.has(e.id);
     const b=document.createElement("button");
     b.className="ei"+(iS?" sel":"");
-    b.setAttribute("aria-pressed",iS?"true":"false");
     b.innerHTML=`<div class="eic" style="background:${e.color}20;color:${e.color}">${e.e}</div>
       <div class="en">${e.name}<span class="badge ${e.auto?"ba":"bp"}">${e.auto?"AUTO":"PASTE"}</span></div>
       <div class="eck"><svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2.5"><path d="M2 6l3 3 5-5"/></svg></div>`;
@@ -289,7 +295,9 @@ function renderEngines(){
   });
   document.getElementById("saBtn").textContent=sel.size===engines.length?"Deselect All":"Select All";
 }
+
 function toggleAll(){if(sel.size===engines.length)sel.clear();else engines.forEach(e=>sel.add(e.id));renderEngines();renderChips();updateStatus();}
+
 function renderChips(){
   const c=document.getElementById("chips"),e=document.getElementById("ce");
   c.innerHTML=""; c.appendChild(e);
@@ -301,40 +309,95 @@ function renderChips(){
     c.appendChild(ch);
   });
 }
+
 function updateStatus(){
   const n=sel.size,b=document.getElementById("lb"),m=document.getElementById("sm2");
   if(!n){m.innerHTML="Select at least one engine.";b.disabled=true;return;}
   const pc=engines.filter(e=>sel.has(e.id)&&!e.auto).length,ac=n-pc;
   let t=`<strong>${n} engine${n!==1?"s":""}</strong> selected`;
-  if(ac&&pc) t+=` — ${ac} auto-launch, ${pc} need paste`;
+  if(ac&&pc) t+=` — ${ac} auto, ${pc} paste`;
   else if(pc) t+=` — all need Ctrl+V paste`;
   m.innerHTML=t; b.disabled=false;
 }
-async function launch(){
+
+function prepLaunch(){
   const p=document.getElementById("ta").value.trim();
   if(!p){toast("Enter a prompt first.","err");return;}
   if(!sel.size){toast("Select at least one engine.","err");return;}
+
+  currentPrompt=p;
   const selE=engines.filter(e=>sel.has(e.id));
   const pasteE=selE.filter(e=>!e.auto);
+
+  // Copy to clipboard
   if(pasteE.length){
-    try{
-      await navigator.clipboard.writeText(p);
-      const names=pasteE.map(e=>e.name).join(", ");
-      document.getElementById("pasteMsg").innerHTML=
-        `<strong>Prompt copied to clipboard!</strong> Needs paste: <strong>${names}</strong><br>In each tab: click the chat box → <kbd>Ctrl+V</kbd> → <kbd>Enter</kbd>`;
-      document.getElementById("pasteAlert").classList.add("vis");
-      setTimeout(()=>document.getElementById("pasteAlert").classList.remove("vis"),14000);
-    }catch(x){toast("Could not auto-copy — manually copy your prompt before launching.","warn");}
+    navigator.clipboard.writeText(p).catch(()=>{});
   }
-  selE.forEach((e,i)=>setTimeout(()=>{
-    const url=e.auto?e.url.replace("{q}",encodeURIComponent(p)):e.url;
-    window.open(url,"_blank","noopener,noreferrer");
-  },i*180));
+
+  // Build queue
+  queueItems=selE;
+  queueIndex=0;
+
+  // Show queue panel
+  const grid=document.getElementById("lqGrid");
+  grid.innerHTML="";
+  selE.forEach((e,i)=>{
+    const btn=document.createElement("button");
+    btn.className="lq-btn";
+    btn.id="lqb-"+e.id;
+    btn.innerHTML=`<span style="font-size:16px">${e.e}</span><span style="flex:1">${e.name}</span><span class="badge ${e.auto?"ba":"bp"}">${e.auto?"AUTO":"PASTE"}</span>`;
+    btn.style.borderLeftColor=e.color;
+    btn.style.borderLeftWidth="3px";
+    btn.onclick=()=>openEngine(e,btn);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById("launchQueue").style.display="flex";
+  document.getElementById("openAllBtn").textContent="Open Next (1/"+selE.length+") →";
+
+  // Show paste notice
+  if(pasteE.length){
+    const names=pasteE.map(e=>e.name).join(", ");
+    document.getElementById("pasteMsg").innerHTML=
+      `<strong>Prompt copied to clipboard!</strong> PASTE engines: <strong>${names}</strong> — after each opens, click its chat box → <kbd>Ctrl+V</kbd> → <kbd>Enter</kbd>`;
+    document.getElementById("pasteAlert").classList.add("vis");
+    setTimeout(()=>document.getElementById("pasteAlert").classList.remove("vis"),20000);
+  }
+
   addHist(p,selE.map(e=>e.name));
-  const ac=selE.filter(e=>e.auto).length,pc=selE.length-ac;
-  toast((ac?ac+" auto-launched":"")+(ac&&pc?" + ":"")+(pc?pc+" need Ctrl+V":""),"ok");
+  toast("Ready! Click each engine button to open it.","ok");
+  document.getElementById("launchQueue").scrollIntoView({behavior:"smooth",block:"nearest"});
 }
+
+function openEngine(e, btn){
+  const url=e.auto?e.url.replace("{q}",encodeURIComponent(currentPrompt)):e.url;
+  window.open(url,"_blank");
+  btn.classList.add("opened");
+  btn.innerHTML=`<span style="font-size:16px">${e.e}</span><span style="flex:1">${e.name}</span><span style="font-size:11px">✓ Opened</span>`;
+
+  // advance queue index
+  const idx=queueItems.findIndex(x=>x.id===e.id);
+  if(idx>=queueIndex) queueIndex=idx+1;
+  const remaining=queueItems.length-queueItems.filter((_,i)=>{
+    const b=document.getElementById("lqb-"+queueItems[i].id);
+    return b&&b.classList.contains("opened");
+  }).length;
+  if(remaining>0){
+    document.getElementById("openAllBtn").textContent="Open Next ("+(queueIndex+1<=queueItems.length?queueIndex+1:queueItems.length)+"/"+queueItems.length+") →";
+  } else {
+    document.getElementById("openAllBtn").textContent="✓ All Opened";
+  }
+}
+
+function openNext(){
+  if(queueIndex>=queueItems.length){toast("All engines opened!","ok");return;}
+  const e=queueItems[queueIndex];
+  const btn=document.getElementById("lqb-"+e.id);
+  if(btn) openEngine(e,btn);
+}
+
 function addHist(p,n){hist.unshift({p,n,t:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});if(hist.length>10)hist.pop();renderHist();}
+
 function renderHist(){
   const s=document.getElementById("histSec"),l=document.getElementById("histList");
   if(!hist.length){s.style.display="none";return;}
@@ -346,9 +409,18 @@ function renderHist(){
     l.appendChild(el);
   });
 }
+
 function delHist(i,e){e.stopPropagation();hist.splice(i,1);renderHist();}
 function clearHist(){hist=[];renderHist();}
-function clearP(){document.getElementById("ta").value="";updateStatus();}
+
+function clearAll(){
+  document.getElementById("ta").value="";
+  document.getElementById("launchQueue").style.display="none";
+  document.getElementById("pasteAlert").classList.remove("vis");
+  currentPrompt=""; queueItems=[]; queueIndex=0;
+  updateStatus();
+}
+
 function renderQP(){
   const g=document.getElementById("qg"); g.innerHTML="";
   QP.forEach(q=>{
@@ -358,6 +430,7 @@ function renderQP(){
     g.appendChild(c);
   });
 }
+
 function addEngine(){
   const n=document.getElementById("cName").value.trim(),u=document.getElementById("cUrl").value.trim();
   const a=document.getElementById("cAuto").checked;
@@ -369,24 +442,16 @@ function addEngine(){
   engines.push({id,name:n,url:u,color:cols[engines.length%cols.length],e:n[0].toUpperCase(),auto:a});
   sel.add(id);
   document.getElementById("cName").value=""; document.getElementById("cUrl").value="";
-  renderEngines(); renderChips(); updateStatus(); buildBk();
+  renderEngines(); renderChips(); updateStatus();
   toast(n+" added!","ok");
 }
-function buildBk(){
-  const data=engines.map(e=>({u:e.url,a:e.auto}));
-  const code=`(function(){var p=prompt("ZPower AI Hub - Enter your prompt:");if(!p)return;var enc=encodeURIComponent(p);var eng=${JSON.stringify(data)};var i=0;eng.forEach(function(e){setTimeout(function(){window.open(e.a?e.u.replace("{q}",enc):e.u,"_blank");},i*200);i++;});var pc=eng.filter(function(e){return!e.a;}).length;if(pc>0){try{navigator.clipboard.writeText(p);}catch(x){}setTimeout(function(){alert("Prompt copied to clipboard!\nFor PASTE tabs: click the chat box and press Ctrl+V then Enter.");},600);}})();`;
-  document.getElementById("bkA").href="javascript:"+code.trim();
-}
-function toggleBk(){
-  const b=document.getElementById("bkBody"),c=document.getElementById("bkChev");
-  const open=b.classList.toggle("hide")===false;
-  c.style.transform=open?"rotate(180deg)":"";
-}
+
 function toast(msg,type=""){
   const c=document.getElementById("tc"),t=document.createElement("div");
   t.className="toast "+type; t.textContent=msg; c.appendChild(t);
   setTimeout(()=>{t.style.transition="opacity .3s";t.style.opacity="0";setTimeout(()=>t.remove(),350);},3200);
 }
+
 (function(){
   const tg=document.querySelector("[data-tt]"),r=document.documentElement;
   let d=r.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light");
@@ -394,8 +459,9 @@ function toast(msg,type=""){
   function ic(){if(tg)tg.innerHTML=d==="dark"?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>':'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';}
   ic(); if(tg)tg.addEventListener("click",()=>{d=d==="dark"?"light":"dark";r.setAttribute("data-theme",d);ic();});
 })();
-document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();launch();}});
-renderEngines(); renderChips(); renderQP(); updateStatus(); buildBk();
+
+document.addEventListener("keydown",e=>{if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();prepLaunch();}}); 
+renderEngines(); renderChips(); renderQP(); updateStatus();
 </script>
 </body>
 </html>
